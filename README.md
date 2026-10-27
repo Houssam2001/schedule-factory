@@ -58,15 +58,17 @@ Planner Approval & Scheduling Dashboard
 
 Candidate technologies include **Python**, **Meta Llama**, **SQL/CSV data pipelines**, **OR-Tools or another constraint solver**, and a web-based production scheduling dashboard. The final stack is not yet selected. AI agents will support reasoning and explanations; hard production constraints should be enforced by the scheduling engine.
 
-## Development Roadmap
+## Development Roadmap (prototype scope)
 
-- [ ] Document factory scheduling workflows and constraints.
-- [ ] Build an ERP data ingestion and validation pipeline.
-- [ ] Implement a baseline production scheduler.
-- [ ] Detect newly added tasks and production disruptions.
-- [ ] Develop monitoring, planning, and rescheduling agents.
-- [ ] Create a dashboard with planner review and approval.
-- [ ] Test against representative manufacturing scenarios and baseline schedules.
+- [x] Document factory scheduling workflows and constraints. (`docs/WORKFLOWS.md`)
+- [x] Build a CSV ingestion and validation pipeline (prototype; full SQL/ERP sync pending). (`src/factory_scheduler/ingestion.py:6`, `tests/test_ingestion.py`)
+- [x] Implement a baseline production scheduler (deterministic; optimizer pending). (`src/factory_scheduler/scheduler.py:5`)
+- [x] Detect newly added, removed, and changed tasks (prototype; downtime windows pending). (`src/factory_scheduler/agents/monitoring.py:4`, `tests/test_scheduler.py`)
+- [x] Develop monitoring, planning, and rescheduling interfaces (pure Python; Llama autonomy pending). (`agents/planning.py`, `agents/rescheduling.py:5`, `agents/decision_support.py:4`)
+- [x] Create a dashboard spec with planner review contract and local preview (full web app with auth pending). (`dashboard/README.md`, `temp/schedule-view.html` gitignored, `cli.py --compare --json`)
+- [x] Test against representative manufacturing scenarios and baseline schedules. (`docs/SCENARIOS.md`, `tests/test_scenarios.py`, 21 tests)
+
+Full production (Meta Llama agents, OR-Tools, ERP write-back, calendars/shifts, auth/audit) remains future — see `docs/ARCHITECTURE.md:7`.
 
 ## Example Scenario
 
