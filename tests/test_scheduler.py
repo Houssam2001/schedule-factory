@@ -1,6 +1,7 @@
 from factory_scheduler.models import Task
 from factory_scheduler.scheduler import schedule
 from factory_scheduler.agents.monitoring import detect_new_tasks
+from factory_scheduler.agents.decision_support import summarize
 
 
 def test_no_machine_overlap():
@@ -13,3 +14,13 @@ def test_new_tasks():
     a = Task("a", "M1", 30, 100)
     b = Task("b", "M2", 20, 100)
     assert detect_new_tasks([a], [a, b]) == [b]
+
+
+def test_summary_reports_lateness_and_utilization():
+    tasks = [Task("a", "M1", 30, 20), Task("b", "M1", 20, 100)]
+    summary = summarize(schedule(tasks))
+    assert summary["tasks"] == 2
+    assert summary["late_tasks"] == 1
+    assert summary["total_late_minutes"] == 10
+    assert summary["makespan_minutes"] == 50
+    assert summary["utilization"] == {"M1": 1.0}
