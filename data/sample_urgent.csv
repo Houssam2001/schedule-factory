@@ -1,0 +1,5 @@
+id,machine,duration_minutes,due_minute,priority
+JOB-001,CNC-1,90,180,2
+JOB-002,CNC-1,45,120,3
+JOB-003,CNC-2,60,150,1
+JOB-004,CNC-1,30,100,5
